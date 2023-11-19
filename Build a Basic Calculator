@@ -1,0 +1,39 @@
+import decimal
+from decimal import Decimal
+def add(num1,num2):
+    return num1 + num2
+def sub(num1,num2):
+    return num1 - num2
+def mul(num1,num2):
+    return num1 * num2
+def div(num1,num2):
+    try:
+        return num1 / num2
+    except ZeroDivisionError:
+        return 'Error! '
+
+def menu():
+    print('1. Add: ')
+    print('2. Sub: ')
+    print('3. Mul: ')
+    print('4. Div: ')
+
+menu()
+while True:
+    choice = int(input('Choice: '))
+    if choice == 1:
+        num1 = decimal.Decimal(str((float(input("Enter the first number: ")))))
+        num2 = decimal.Decimal(str((float(input("Enter the second number: ")))))
+        print(add(num1,num2))
+    if choice == 2:
+        num1 = float(input("Enter the first number: "))
+        num2 = float(input("Enter the second number: "))
+        print(sub(num1,num2))
+    if choice == 3:
+        num1 = float(input("Enter the first number: "))
+        num2 = float(input("Enter the second number: "))
+        print(mul(num1,num2))
+    if choice == 4:
+        num1 = float(input("Enter the first number: "))
+        num2 = float(input("Enter the second number: "))
+        print(div(num1,num2))
