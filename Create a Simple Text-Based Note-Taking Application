@@ -1,0 +1,60 @@
+di = {}
+def creation(id,note):
+    if id in di:
+        return di[id]
+    else:
+        di[id] = note
+        return 'Yes! '
+def listing():
+    print(di)
+
+def retrieval(ID):
+    if ID in di:
+        print(di[ID])
+    else:
+        print('Not exist: ')
+
+def deletion(ID):
+    if ID in di:
+        del di[ID]
+        return 'Deleted: '
+    else:
+        return 'Not exist:'
+
+def search(keyword):
+    for k,v in di.items():
+        if keyword in di[k]:
+            return (k, di[k])
+    print("No keyword found")
+def menu():
+    print('1. Creation: ')
+    print('2. Listing: ')
+    print('3. Retrieval: ')
+    print('4. Deletion: ')
+    print('5. Search Notes: ')
+
+menu()
+choice = 1
+def foo():
+    while True:
+        choice = int(input("Choice: "))
+        if choice == 1:
+            ID = int(input("Enter your ID: "))
+            note = input("Note: ")
+            print(creation(ID,note))
+        if choice == 2:
+            listing()
+        if choice == 3:
+            ID = int(input("ID: "))
+            retrieval(ID)
+        if choice == 4:
+            ID = int(input("Enter your ID: "))
+            print(deletion(ID))
+        if choice == 5:
+            keyword = input('Keyword: ')
+            print(search(keyword))
+
+try:
+    foo()
+except ValueError:
+    print("Sorry")
