@@ -1,0 +1,57 @@
+import json
+di = {}
+
+def data_storage(key,value):
+    f = open('f.json','w+')
+    if key in di:
+        return di[key]
+    else:
+        di[key] = value
+    y = json.dump(di,f)
+    f.close()
+    return y
+def retrieval():
+    f = open('f.json')
+    # print(f.read())
+    y = json.load(f)
+    print(y)
+
+def update(key,value2):
+    f = open('f.json','w+')
+    if key in di:
+        di[key] = value2
+    y = json.dump(di,f)
+    f.close()
+    return y
+def deletion(key):
+    f = open('f.json','w+')
+    if key in di:
+        del di[key]
+    else:
+        print('chka: ')
+    y = json.dump(di,f)
+    f.close()
+    return y
+def menu():
+    print('1. Data Storage: ')
+    print('2. Retrieval: ')
+    print('3. Update: ')
+    print('4. Deletion: ')
+
+menu()
+choice = 1
+while True:
+    choice = int(input('Choice: '))
+    if choice == 1:
+        key = int(input("Key: "))
+        value = input('Value: ')
+        data_storage(key,value)
+    if choice == 2:
+        retrieval()
+    if choice == 3:
+        key = int(input('Key: '))
+        value2 = input('New value: ')
+        update(key,value2)
+    if choice == 4:
+        key = int(input('Key: '))
+        deletion(key)
