@@ -1,0 +1,62 @@
+#To do list
+
+di = {}
+def addition(number, description, complete = False):
+    if number in di:
+        return di[number]
+    else:
+        di[number] = [description, complete]
+        print(di)
+        return ('Successful Addition!')
+
+def remove(number):
+    if number in di:
+        del di[number]
+        return ('Deleted')
+    else:
+        return ('No such ID, sorry!')
+
+def listing(number):
+    if number in di:
+        return "Found"
+    return "Sorry, Nothing found"
+
+def completion(number):
+    print("1->For Complete")
+    print("2->For Incomplete")
+    choose = int(input("Enter your choice: "))
+    if choose == 1:
+        di[number][1] = True
+    if choose == 2:
+        return di[number]
+    print((di))
+    return di
+
+def menu():
+    print('1. Addition: ')
+    print('2. Remove: ')
+    print('3. Listing: ')
+    print('4. Completion: ')
+    print('5. Prioritization: ')
+
+
+menu()
+choice = 1
+while True:
+    choice = int(input("Choice:  "))
+    if choice == 1:
+        number = max(di, default = 0)+2
+        print(f"Your Unique Number is: {number}")
+        des = input("des: ")
+        print(addition(number,des))
+    if choice == 2:
+        number = int(input("Enter the number: "))
+        print(remove(number))
+    if choice == 3:
+        number = int(input("Enter your ID: "))
+        print(f"Under the ID {number} is the following Task: {di[number]}")
+        print(listing(number))
+    if choice == 4:
+        number = int(input("Enter the number: "))
+        print(completion(number))
+
