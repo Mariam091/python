@@ -1,0 +1,73 @@
+def decor(function):
+    def wrapper(*args,**kwargs):
+        str2 = args[0]
+        if str2 == 'admin' or str2 == 'root' or str2 == 'user':
+            return False
+        for i in str2:
+            if not ('0'<= i <= '9' or 'A' <= i <= 'Z' or 'a' <= i <= 'z'):
+                return False
+        count = len(str2)
+        if 5 <= count and count <= 20:
+            return function(*args,**kwargs)
+        return False
+    return wrapper
+
+def valid_email(func):
+    def wrapper(*args,**kwargs):
+        inp = '@gmail.com'
+        str2 = args[1]
+        x = str2.split("@")
+        if x[1][0].isalnum():
+            if x[1] == inp[1:]:
+                return func(*args,**kwargs)
+            return False
+
+    return wrapper
+
+def phone(func):
+    def inner(*args,**kwargs):
+        number = args[2]
+        if args[2][0] == '0' and len(number) == 9:
+            if number.isdigit():
+                return func(*args,**kwargs)
+        if args[2][0] == '+' and len(number) == 12:
+            if number[1:].isdigit():
+                return func(*args,**kwargs)
+    return inner
+
+def password(func):
+    def inner(*args,**kwargs):
+        special_characters = {'!', '@', '#', '$', '%', '^', '&', '*'}
+        pas = args[3]
+        if len(pas) >= 8:
+            if any(i in special_characters for i in pas):
+                if any(i.upper() for i in pas):
+                    if any(i.lower() for i in pas):
+                        if any(i.isdigit() for i in pas):
+                            return func(*args,**kwargs)
+    return inner
+
+def repeat(func):
+    def inner(*args,**kwargs):
+        if args[4] == args[3]:
+            return func(*args,**kwargs)
+        return False
+    return inner
+
+@repeat
+@password
+@phone
+@valid_email
+@decor
+
+def function(anun: str, email: str, hamar: str, passw: str, re_pass: str):
+    return (anun, email, hamar, passw, re_pass)
+
+name = input("username: ")
+mail = input("email: ")
+number = input("number: ")
+passwo = input("password: ")
+rep = input("repeat password: ")
+res = function(name,mail,number,passwo,rep)
+print(res)
+
